@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishShield Academy: Anti-Phishing Simulator</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <!-- Header -->
+    <header class="text-white text-center py-4 unique-header">
+        <div class="container">
+            <h1 class="display-6 fw-bold">PhishShield Academy: Anti-Phishing Interactive Simulator</h1>
+            <p class="mb-0 text-light opacity-75">Cyber Security Awareness Capstone Project — Developer: Tejal Rane</p>
+        </div>
+    </header>
+
+    <main class="container my-5">
+        <!-- Dashboard Intro -->
+        <div id="dashboard-view" class="card shadow-sm p-4 mb-5 bg-white rounded">
+            <h2 class="h4 text-indigo fw-bold mb-3">Welcome Analyst, Ready to Train?</h2>
+            <p class="text-muted text-sm text-secondary">Select a sandbox module below to begin analyzing UI spoofing, credential indicators, and domain structures in a zero-risk educational environment.</p>
+            <div class="d-flex gap-3 mt-4">
+                <button class="btn btn-purple px-4" onclick="switchView('simulator')">Launch Simulator Module →</button>
+                <button class="btn btn-outline-secondary px-4" onclick="switchView('quiz')">Take Assessment Quiz</button>
+            </div>
+        </div>
+
+        <!-- Simulator Frame Matrix (Side-by-Side View) -->
+        <div id="simulator-view" class="d-none">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="h5 fw-bold mb-0 text-dark">Active Simulator Frame: Side-by-Side Contrast Matrix</h3>
+                <button class="btn btn-sm btn-secondary" onclick="switchView('dashboard')">Back to Dashboard</button>
+            </div>
+            
+            <div class="row g-4">
+                <!-- Legitimate Frame -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100 border-success-subtle">
+                        <div class="card-header bg-success-subtle text-success fw-bold d-flex align-items-center">
+                            <span class="me-2">✓</span> LEGITIMATE INTERFACE
+                        </div>
+                        <div class="card-body bg-white p-4">
+                            <div class="browser-bar mb-3 p-2 rounded bg-light border text-truncate text-sm text-success text-muted">
+                                https://login.microsoftonline.com/auth
+                            </div>
+                            <div class="mock-login border p-4 text-center rounded">
+                                <h4 class="h5 fw-bold mb-3 text-start text-secondary">Microsoft</h4>
+                                <input type="text" class="form-control mb-3" value="tejal.rane@academy.com" readonly disabled>
+                                <button class="btn btn-primary w-100 btn-sm disabled">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phishing Frame -->
+                <div class="col-md-6">
+                    <div class="card shadow-sm h-100 border-danger-subtle">
+                        <div class="card-header bg-danger-subtle text-danger fw-bold d-flex align-items-center">
+                            <span class="me-2">⚠</span> PHISHING REPLICA DETECTED
+                        </div>
+                        <div class="card-body bg-white p-4">
+                            <div class="browser-bar mb-3 p-2 rounded bg-light border text-truncate text-sm text-danger fw-bold bg-danger-subtle">
+                                http://microsoft-secure-login.com/auth
+                            </div>
+                            <div class="mock-login border p-4 text-center rounded">
+                                <h4 class="h5 fw-bold mb-3 text-start text-secondary">Microsoft</h4>
+                                <input type="text" class="form-control mb-3" placeholder="Enter password" readonly disabled>
+                                <button class="btn btn-primary w-100 btn-sm disabled">Next</button>
+                            </div>
+                            <div class="mt-3 p-3 bg-light border rounded text-danger text-xs text-sm">
+                                <strong>↳ Attack Indicators:</strong> Missing HTTPS security prefix & deceptive lookalike domain string layout design.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Assessment Console -->
+        <div id="quiz-view" class="d-none card shadow-sm p-4 bg-white rounded">
+            <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+                <h3 class="h5 fw-bold text-dark mb-0">Assessment Console</h3>
+                <button class="btn btn-sm btn-secondary" onclick="switchView('dashboard')">Exit Quiz</button>
+            </div>
+
+            <!-- Quiz Questions State Machine -->
+            <div id="quiz-body">
+                <p class="text-muted text-sm">Analyze the vector configuration below and evaluate its structural security status.</p>
+                <div class="p-3 bg-light border rounded font-monospace mb-4 text-sm text-break" id="quiz-question-box">
+                    <!-- Dynamic Text Content -->
+                </div>
+                <div class="d-flex gap-3">
+                    <button class="btn btn-success flex-fill py-2" onclick="evaluateAnswer('Safe')">Mark as Safe</button>
+                    <button class="btn btn-danger flex-fill py-2" onclick="evaluateAnswer('Phishing')">Mark as Phishing</button>
+                </div>
+            </div>
+
+            <!-- Quiz Score Metric Results -->
+            <div id="quiz-results" class="d-none text-center py-4">
+                <div class="score-badge mx-auto mb-3 d-flex align-items-center justify-content-center text-white font-weight-bold display-6 rounded-circle bg-success">
+                    5/5
+                </div>
+                <h4 class="fw-bold text-success">Assessment Complete: Perfect Score!</h4>
+                <p class="text-muted text-sm mb-4">The localized analysis engine validated all choices. Threat recognition metrics meet compliance targets for Tejal Rane.</p>
+                
+                <div class="text-start max-w-md mx-auto bg-light border p-3 rounded mb-4 text-sm">
+                    <div class="mb-2 text-success">✓ Scenario 1: Detected Lookalike Character (g00gle.com instead of google.com)</div>
+                    <div class="mb-2 text-success">✓ Scenario 2: Identified False File Extension Payload Trigger</div>
+                    <div class="text-success">✓ Scenario 3: Caught Subdomain Masking Trick (paypal.com.verification-security.net)</div>
+                </div>
+                <button class="btn btn-purple" onclick="resetQuiz()">Restart Training</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Notes -->
+    <footer class="text-center py-4 text-muted border-top text-xs text-sm">
+        <div class="container">
+            Cyber Security Capstone Assignment Submission | Built by Tejal Rane
+        </div>
+    </footer>
+
+    <!-- Core State Control Logic script -->
+    <script src="app.js"></script>
+</body>
+</html>
+

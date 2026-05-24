@@ -1,0 +1,46 @@
+/* Color Palette Variables & Layout Structure Rules */
+:root {
+    --purple-primary: #6f42c1;
+    --purple-dark: #59359a;
+    --indigo-primary: #4b35cd;
+}
+
+.unique-header {
+    background: linear-gradient(135deg, var(--purple-primary) 0%, var(--indigo-primary) 100%);
+}
+
+.text-indigo {
+    color: var(--indigo-primary);
+}
+
+.btn-purple {
+    background-color: var(--purple-primary);
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: var(--purple-dark);
+    color: white;
+}
+
+.browser-bar {
+    font-family: monospace;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+.score-badge {
+    width: 90px;
+    height: 90px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+}
+
+.max-w-md {
+    max-width: 550px;
+}
+
+.text-sm {
+    font-size: 0.9rem;
+}
+
